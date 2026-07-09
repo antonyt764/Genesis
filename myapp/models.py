@@ -33,6 +33,8 @@ class Post(models.Model):
         return self.title
 
 
+
+
 class ContactMessage(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
