@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .models import ContactMessage, NewsletterSubscriber
 
 
 def home(request):
@@ -18,3 +19,24 @@ def service_details(request):
 
 def starter(request):
     return render(request, 'starter-page.html')
+
+
+def contact(request):
+    if request.method == 'POST':
+        ContactMessage.objects.create(
+            name=request.POST.get('name'),
+            email=request.POST.get('email'),
+            subject=request.POST.get('subject'),
+            message=request.POST.get('message'),
+        )
+        return redirect('/#contact')
+    return redirect('home')
+
+
+def newsletter(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        if email:
+            NewsletterSubscriber.objects.get_or_create(email=email)
+        return redirect('/#subscribe')
+    return redirect('home')

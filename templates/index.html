@@ -42,7 +42,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto">
+      <a href="{% url 'home' %}" class="logo d-flex align-items-center me-auto">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="{% static 'assets/img/logo.webp' %}" alt=""> -->
         <h1 class="sitename">Microsoft</h1>
@@ -56,8 +56,7 @@
           <li><a href="#portfolio">Portfolio</a></li>
           <li><a href="#team">Team</a></li>
           <li><a href="#pricing">Pricing</a></li>
-          <!-- <li><a href="blog.html">Blog</a></li> -->
-           <li><a href="{% url 'blog' %}">Blog</a></li>
+          <li><a href="{% url 'blog' %}">Blog</a></li>
           <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="#">Dropdown 1</a></li>
@@ -515,7 +514,7 @@
                 <h4>App 1</h4>
                 <p>Lorem ipsum, dolor sit</p>
                 <a href="{% static 'assets/img/portfolio/portfolio-portrait-1.webp' %}" title="App 1" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                <a href="{% url 'portfolio_details' %}" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
@@ -525,7 +524,7 @@
                 <h4>Product 1</h4>
                 <p>Lorem ipsum, dolor sit</p>
                 <a href="{% static 'assets/img/portfolio/portfolio-1.webp' %}" title="Product 1" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                <a href="{% url 'portfolio_details' %}" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
@@ -535,7 +534,7 @@
                 <h4>Branding 1</h4>
                 <p>Lorem ipsum, dolor sit</p>
                 <a href="{% static 'assets/img/portfolio/portfolio-3.webp' %}" title="Branding 1" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                <a href="{% url 'portfolio_details' %}" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
@@ -545,7 +544,7 @@
                 <h4>App 2</h4>
                 <p>Lorem ipsum, dolor sit</p>
                 <a href="{% static 'assets/img/portfolio/portfolio-4.webp' %}" title="App 2" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                <a href="{% url 'portfolio_details' %}" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
@@ -555,7 +554,7 @@
                 <h4>Product 2</h4>
                 <p>Lorem ipsum, dolor sit</p>
                 <a href="{% static 'assets/img/portfolio/portfolio-portrait-2.webp' %}" title="Product 2" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                <a href="{% url 'portfolio_details' %}" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
@@ -565,7 +564,7 @@
                 <h4>Branding 2</h4>
                 <p>Lorem ipsum, dolor sit</p>
                 <a href="{% static 'assets/img/portfolio/portfolio-portrait-3.webp' %}" title="Branding 2" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                <a href="{% url 'portfolio_details' %}" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
@@ -575,7 +574,7 @@
                 <h4>App 3</h4>
                 <p>Lorem ipsum, dolor sit</p>
                 <a href="{% static 'assets/img/portfolio/portfolio-7.webp' %}" title="App 3" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                <a href="{% url 'portfolio_details' %}" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
@@ -585,7 +584,7 @@
                 <h4>Product 3</h4>
                 <p>Lorem ipsum, dolor sit</p>
                 <a href="{% static 'assets/img/portfolio/portfolio-8.webp' %}" title="Product 3" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                <a href="{% url 'portfolio_details' %}" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
@@ -595,7 +594,7 @@
                 <h4>Branding 3</h4>
                 <p>Lorem ipsum, dolor sit</p>
                 <a href="{% static 'assets/img/portfolio/portfolio-9.webp' %}" title="Branding 2" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                <a href="{% url 'portfolio_details' %}" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
@@ -955,9 +954,10 @@
             <div class="cta-content" data-aos="fade-up" data-aos-delay="200">
               <h2>Subscribe to our newsletter</h2>
               <p>Proin eget tortor risus. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Curabitur aliquet quam id dui posuere blandit.</p>
-              <form action="forms/newsletter.php" method="post" class="php-email-form cta-form" data-aos="fade-up" data-aos-delay="300">
+              <form action="{% url 'newsletter' %}" method="post" class="cta-form" data-aos="fade-up" data-aos-delay="300">
+                {% csrf_token %}
                 <div class="input-group mb-3">
-                  <input type="email" class="form-control" placeholder="Email address..." aria-label="Email address" aria-describedby="button-subscribe">
+                  <input type="email" name="email" class="form-control" placeholder="Email address..." aria-label="Email address" aria-describedby="button-subscribe" required>
                   <button class="btn btn-primary" type="submit" id="button-subscribe">Subscribe</button>
                 </div>
                 <div class="loading">Loading</div>
@@ -1012,7 +1012,7 @@
 
                 <hr>
 
-                <a href="blog-details.html" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+                <a href="{% url 'blog_details' %}" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
 
               </div>
 
@@ -1043,7 +1043,7 @@
 
                 <hr>
 
-                <a href="blog-details.html" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+                <a href="{% url 'blog_details' %}" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
 
               </div>
 
@@ -1074,7 +1074,7 @@
 
                 <hr>
 
-                <a href="blog-details.html" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+                <a href="{% url 'blog_details' %}" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
 
               </div>
 
@@ -1132,7 +1132,8 @@
           </div>
 
           <div class="col-lg-7">
-            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+            <form action="{% url 'contact' %}" method="post" data-aos="fade-up" data-aos-delay="200">
+              {% csrf_token %}
               <div class="row gy-4">
 
                 <div class="col-md-6">
@@ -1183,7 +1184,8 @@
           <div class="col-lg-6">
             <h4>Join Our Newsletter</h4>
             <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
-            <form action="forms/newsletter.php" method="post" class="php-email-form">
+            <form action="{% url 'newsletter' %}" method="post">
+              {% csrf_token %}
               <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
               <div class="loading">Loading</div>
               <div class="error-message"></div>
@@ -1197,7 +1199,7 @@
     <div class="container footer-top">
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
-          <a href="index.html" class="d-flex align-items-center">
+          <a href="{% url 'home' %}" class="d-flex align-items-center">
             <span class="sitename">Arsha</span>
           </a>
           <div class="footer-contact pt-3">
@@ -1273,6 +1275,7 @@
 
   <!-- Main JS File -->
   <script src="{% static 'assets/js/main.js' %}"></script>
+
 </body>
 
 </html>
