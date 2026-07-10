@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.admin.views.decorators import staff_member_required
 from .models import ContactMessage, NewsletterSubscriber
 
 
@@ -22,6 +23,7 @@ def starter(request):
 
 
 def contact(request):
+    
     if request.method == 'POST':
         ContactMessage.objects.create(
             name=request.POST.get('name'),
@@ -31,6 +33,12 @@ def contact(request):
         )
         return redirect('/#contact')
     return redirect('home')
+
+
+@staff_member_required
+def contact_list(request):
+    messages = ContactMessage.objects.all()
+    return render(request, 'contact-list.html', {'messages': messages})
 
 
 def newsletter(request):
