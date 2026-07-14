@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.admin.views.decorators import staff_member_required
+from django.views.decorators.http import require_POST
 from .models import ContactMessage, NewsletterSubscriber
 
 
@@ -41,6 +42,14 @@ def contact_list(request):
     return render(request, 'contact-list.html', {'messages': messages})
 
 
+@staff_member_required
+@require_POST
+def contact_delete(request, pk):
+    message = get_object_or_404(ContactMessage, pk=pk)
+    message.delete()
+    return redirect('contact_list')
+
+
 def newsletter(request):
     if request.method == 'POST':
         email = request.POST.get('email')
@@ -48,3 +57,5 @@ def newsletter(request):
             NewsletterSubscriber.objects.get_or_create(email=email)
         return redirect('/#subscribe')
     return redirect('home')
+
+

@@ -10,7 +10,8 @@ urlpatterns = [
     path('starter/', views.starter, name='starter'),
     path('contact/', views.contact, name='contact'),
     path('contacts/', views.contact_list, name='contact_list'),
+    path('contacts/<int:pk>/delete/', views.contact_delete, name='contact_delete'),
     path('newsletter/', views.newsletter, name='newsletter'),
     # path ('contacts/', views.contact_list,name='contact_list').
-    
+
 ]
