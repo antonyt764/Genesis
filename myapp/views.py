@@ -59,3 +59,20 @@ def newsletter(request):
     return redirect('home')
 
 
+@staff_member_required
+def contact_edit(request,pk):
+    message = get_object_or_404(ContactMessage,pk=pk)
+    
+    
+    if request.method == "POST":
+        message.name = request.POST.get("name")
+        message.email = request. POST.get("email")
+        message.subject = request.POST.get("subject")
+        message.message = request.POST.get("message")
+        message.save()
+
+        return redirect("contact_list")
+    return render(request,"contact-edit.html",{
+        "message":message
+    })
+    
