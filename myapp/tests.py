@@ -2,17 +2,50 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
 
-from .models import ContactMessage, NewsletterSubscriber
+from .models import Category, ContactMessage, NewsletterSubscriber, Post
 
 
 class StaticPageTests(TestCase):
     def test_static_pages_render(self):
         for name in [
-            'home', 'blog', 'blog_details', 'portfolio_details',
+            'home', 'blog', 'portfolio_details',
             'service_details', 'starter',
         ]:
             response = self.client.get(reverse(name))
             self.assertEqual(response.status_code, 200, msg=f'{name} did not return 200')
+
+
+class BlogViewTests(TestCase):
+    def setUp(self):
+        self.category = Category.objects.create(name='Travel')
+        self.post = Post.objects.create(
+            title='First Post', author='John Doe', category=self.category,
+            excerpt='A short teaser.', content='Full post content.',
+        )
+
+    def test_blog_list_shows_posts(self):
+        response = self.client.get(reverse('blog'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'First Post')
+
+    def test_blog_list_filters_by_category(self):
+        other_category = Category.objects.create(name='Design')
+        Post.objects.create(
+            title='Second Post', author='Jane Doe', category=other_category,
+            content='Other content.',
+        )
+        response = self.client.get(reverse('blog'), {'category': self.category.pk})
+        self.assertEqual(list(response.context['posts']), [self.post])
+
+    def test_blog_details_renders_post(self):
+        response = self.client.get(reverse('blog_details', args=[self.post.pk]))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'First Post')
+        self.assertContains(response, 'Full post content.')
+
+    def test_blog_details_404_for_missing_post(self):
+        response = self.client.get(reverse('blog_details', args=[9999]))
+        self.assertEqual(response.status_code, 404)
 
 
 class ContactViewTests(TestCase):
@@ -32,6 +65,17 @@ class ContactViewTests(TestCase):
         self.assertEqual(message.name, 'Jane Doe')
         self.assertEqual(message.email, 'jane@example.com')
         self.assertRedirects(response, '/#contact', fetch_redirect_response=False)
+
+    def test_ajax_post_returns_ok(self):
+        response = self.client.post(reverse('contact'), {
+            'name': 'Jane Doe',
+            'email': 'jane@example.com',
+            'subject': 'Hello',
+            'message': 'Just saying hi.',
+        }, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.content.decode(), 'OK')
+        self.assertEqual(ContactMessage.objects.count(), 1)
 
 
 class NewsletterViewTests(TestCase):
@@ -53,6 +97,15 @@ class NewsletterViewTests(TestCase):
         response = self.client.post(reverse('newsletter'), {})
         self.assertEqual(NewsletterSubscriber.objects.count(), 0)
         self.assertRedirects(response, '/#subscribe', fetch_redirect_response=False)
+
+    def test_ajax_post_returns_ok(self):
+        response = self.client.post(
+            reverse('newsletter'), {'email': 'sub@example.com'},
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.content.decode(), 'OK')
+        self.assertEqual(NewsletterSubscriber.objects.count(), 1)
 
 
 class ContactStaffViewsTests(TestCase):

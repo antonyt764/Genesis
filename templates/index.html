@@ -988,98 +988,48 @@
 
         <div class="row gy-5">
 
+          {% for post in recent_posts %}
           <div class="col-xl-4 col-md-6">
             <div class="post-item position-relative h-100" data-aos="fade-up" data-aos-delay="100">
 
               <div class="post-img position-relative overflow-hidden">
+                {% if post.image %}
+                <img src="{{ post.image.url }}" class="img-fluid" alt="">
+                {% else %}
                 <img src="{% static 'assets/img/blog/blog-post-1.webp' %}" class="img-fluid" alt="">
-                <span class="post-date">December 12</span>
+                {% endif %}
+                <span class="post-date">{{ post.created_at|date:'F j' }}</span>
               </div>
 
               <div class="post-content d-flex flex-column">
 
-                <h3 class="post-title">Eum ad dolor et. Autem aut fugiat debitis</h3>
+                <h3 class="post-title">{{ post.title }}</h3>
 
                 <div class="meta d-flex align-items-center">
                   <div class="d-flex align-items-center">
-                    <i class="bi bi-person"></i> <span class="ps-2">Julia Parker</span>
+                    <i class="bi bi-person"></i> <span class="ps-2">{{ post.author }}</span>
                   </div>
+                  {% if post.category %}
                   <span class="px-3 text-black-50">/</span>
                   <div class="d-flex align-items-center">
-                    <i class="bi bi-folder2"></i> <span class="ps-2">Politics</span>
+                    <i class="bi bi-folder2"></i> <span class="ps-2">{{ post.category.name }}</span>
                   </div>
+                  {% endif %}
                 </div>
 
                 <hr>
 
-                <a href="{% url 'blog_details' %}" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+                <a href="{% url 'blog_details' post.pk %}" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
 
               </div>
 
             </div>
           </div><!-- End post item -->
-
-          <div class="col-xl-4 col-md-6">
-            <div class="post-item position-relative h-100" data-aos="fade-up" data-aos-delay="200">
-
-              <div class="post-img position-relative overflow-hidden">
-                <img src="{% static 'assets/img/blog/blog-post-2.webp' %}" class="img-fluid" alt="">
-                <span class="post-date">July 17</span>
-              </div>
-
-              <div class="post-content d-flex flex-column">
-
-                <h3 class="post-title">Et repellendus molestiae qui est sed omnis</h3>
-
-                <div class="meta d-flex align-items-center">
-                  <div class="d-flex align-items-center">
-                    <i class="bi bi-person"></i> <span class="ps-2">Mario Douglas</span>
-                  </div>
-                  <span class="px-3 text-black-50">/</span>
-                  <div class="d-flex align-items-center">
-                    <i class="bi bi-folder2"></i> <span class="ps-2">Sports</span>
-                  </div>
-                </div>
-
-                <hr>
-
-                <a href="{% url 'blog_details' %}" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
-
-              </div>
-
-            </div>
-          </div><!-- End post item -->
-
-          <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="post-item position-relative h-100">
-
-              <div class="post-img position-relative overflow-hidden">
-                <img src="{% static 'assets/img/blog/blog-post-3.webp' %}" class="img-fluid" alt="">
-                <span class="post-date">September 05</span>
-              </div>
-
-              <div class="post-content d-flex flex-column">
-
-                <h3 class="post-title">Quia assumenda est et veritati tirana ploder</h3>
-
-                <div class="meta d-flex align-items-center">
-                  <div class="d-flex align-items-center">
-                    <i class="bi bi-person"></i> <span class="ps-2">Lisa Hunter</span>
-                  </div>
-                  <span class="px-3 text-black-50">/</span>
-                  <div class="d-flex align-items-center">
-                    <i class="bi bi-folder2"></i> <span class="ps-2">Economics</span>
-                  </div>
-                </div>
-
-                <hr>
-
-                <a href="{% url 'blog_details' %}" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
-
-              </div>
-
-            </div>
-          </div><!-- End post item -->
+          {% empty %}
+          <div class="col-12">
+            <p>No blog posts yet. Check back soon!</p>
+          </div>
+          {% endfor %}
 
         </div>
 
@@ -1132,7 +1082,7 @@
           </div>
 
           <div class="col-lg-7">
-            <form action="{% url 'contact' %}" method="post" data-aos="fade-up" data-aos-delay="200">
+            <form action="{% url 'contact' %}" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
               {% csrf_token %}
               <div class="row gy-4">
 
@@ -1184,7 +1134,7 @@
           <div class="col-lg-6">
             <h4>Join Our Newsletter</h4>
             <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
-            <form action="{% url 'newsletter' %}" method="post">
+            <form action="{% url 'newsletter' %}" method="post" class="php-email-form">
               {% csrf_token %}
               <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
               <div class="loading">Loading</div>
